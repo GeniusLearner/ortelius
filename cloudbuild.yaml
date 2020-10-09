@@ -1,7 +1,7 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'ls -A1 | xargs rm -rf;git clone $$COMPONENT_GITURL .;env | sed "s/^/export /" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
+    args: ['-c', 'ls -A1 | xargs rm -rf;git clone $$COMPONENT_GITURL .;echo cd /workspace >> /workspace/cloudbuild.sh;env | sed "s/^/export /" >> /workspace/cloudbuild.sh']
     env: 
       - 'COMPONENT_GITURL=http://github.com/ortelius/ortelius'
       - 'COMPONENT_VERSION=9.0.0'
@@ -11,7 +11,7 @@ steps:
   # Build the image and save details as part of the LABEL
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" --build-arg "BLDDATE=$$BLDDATE" --build-arg "REPO_NAME=$REPO_NAME" --build-arg "COMMIT_SHA=$COMMIT_SHA" --build-arg "SHORT_SHA=$SHORT_SHA" --build-arg "PROJECT_ID=$PROJECT_ID" --build-arg "BUILD_ID=$BUILD_ID" --build-arg "BRANCH_NAME=$BRANCH_NAME" --build-arg "TAG_NAME=$TAG_NAME" --build-arg "REVISION_ID=$REVISION_ID" .']
+    args: ["-c", 'cat /workspace/cloudbuild.sh;. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" --build-arg "BLDDATE=$$BLDDATE" --build-arg "REPO_NAME=$REPO_NAME" --build-arg "COMMIT_SHA=$COMMIT_SHA" --build-arg "SHORT_SHA=$SHORT_SHA" --build-arg "PROJECT_ID=$PROJECT_ID" --build-arg "BUILD_ID=$BUILD_ID" --build-arg "BRANCH_NAME=$BRANCH_NAME" --build-arg "TAG_NAME=$TAG_NAME" --build-arg "REVISION_ID=$REVISION_ID" .']
     
   # Login to Quay for push.
   # PASSWORD is decrypted before this step runs.
