@@ -1,9 +1,9 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'echo COMPONENT_GITURL=`git config --get remote.origin.url` >> /workspace/cloudbuild.sh;env | sed "s/^/export /" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
+    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
     env: 
-      - 'COMPONENT_GITURL=$REPO_NAME'
+      - 'COMPONENT_GITURL=http://github.com/ortelius/ortelius'
       - 'COMPONENT_VERSION=9.0.0'
       - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ortelius'
   # Use commit count in IMAGE_TAG
