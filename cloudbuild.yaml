@@ -1,7 +1,7 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
+    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh']
     env: 
       - 'COMPONENT_GITURL=http://github.com/ortelius/ortelius'
       - 'COMPONENT_VERSION=9.0.0'
@@ -9,7 +9,7 @@ steps:
   # Use commit count in IMAGE_TAG
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', '. /workspace/cloudbuild.sh;mkdir /tmp/git;git clone $$COMPONENT_GITURL /tmp/git;cd /tmp/git;echo export IMAGE_TAG=\"$BRANCH_NAME-v$$COMPONENT_VERSION.$(git rev-list --count $BRANCH_NAME)-g$SHORT_SHA\" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
+    args: ['-c', '. /workspace/cloudbuild.sh;mkdir /tmp/git;git clone $$COMPONENT_GITURL /tmp/git;cd /tmp/git;export CNT=`git rev-list --count $BRACH_NAME`;echo $$CNT;echo export IMAGE_TAG=\"$BRANCH_NAME-v$$COMPONENT_VERSION.$$CNT-g$SHORT_SHA\" >> /workspace/cloudbuild.sh;cat /workspace/cloudbuild.sh']
 
   # Build the image and save details as part of the LABEL
   - name: 'gcr.io/cloud-builders/docker'
