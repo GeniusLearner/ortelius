@@ -9,7 +9,7 @@ steps:
       - 'BLDDATE=`date`'
       - 'BRANCH_NAME=$BRANCH_NAME'
       - 'SHORT_SHA=$SHORT_SHA'
-      - 'IMAGE_NAME=$BRANCH_NAME-v$COMPONENT_VERSION.$(git rev-list --count $BRANCH_NAME)-g$SHORT_SHA'
+      - 'IMAGE_NAME=$BRANCH_NAME-v$$COMPONENT_VERSION.$(git rev-list --count $BRANCH_NAME)-g$SHORT_SHA'
   # Use commit count in IMAGE_TAG
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
