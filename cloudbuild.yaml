@@ -1,7 +1,7 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'env >> /workspace/cloudbuild.sh']
+    args: ['-c', 'echo COMPONENT_GITURL=`git config --get remote.origin.url` >> /workspace/cloudbuild.sh;env >> /workspace/cloudbuild.sh']
     env: 
       - 'COMPONENT_GITURL=$REPO_NAME'
       - 'COMPONENT_VERSION=9.0.0'
