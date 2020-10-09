@@ -1,7 +1,7 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'rm -rf /workspace/*;ls -la;git clone $$COMPONENT_GITURL .']
+    args: ['-c', 'rm -rf /workspace/*;rm -rf /workspace/.*;ls -la;git clone $$COMPONENT_GITURL .']
     env: 
       - 'COMPONENT_GITURL=http://github.com/ortelius/ortelius'
       - 'COMPONENT_VERSION=9.0.0'
