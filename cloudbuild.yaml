@@ -29,6 +29,7 @@ steps:
     env:
       - 'DOCKER_CONFIG=/workspace/docker-config'
     args: ['-c', ". /workspace/cloudbuild.sh;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG"]
+    timeout: 1200s
 
   # Get image id
   - name: 'gcr.io/cloud-builders/docker'
