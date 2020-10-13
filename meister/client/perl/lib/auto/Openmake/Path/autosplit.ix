@@ -1,0 +1,57 @@
+# Index created by AutoSplit for C:/Work/Catalyst/SourceCode/Openmake640_Trunk/perl/lib/Openmake/Path.pm
+#    (file acts as timestamp)
+package Openmake::Path;
+sub setDrive  ;
+sub drive  ;
+sub volume  ;
+sub getD  ;
+sub getDrive  ;
+sub getP  ;
+sub getJavacEscaped  ;
+sub getQuotedJavacEscaped  ;
+sub getPerlFileEscaped  ;
+sub anchor  ;
+sub relative  ;
+sub setVolume 
+;
+sub getVolume 
+;
+sub getPath 
+;
+sub getJEscaped 
+;
+sub getJEscapedQuoted 
+;
+sub getPerlified 
+;
+sub setPath 
+;
+sub getQuoted 
+;
+sub getEscaped 
+;
+sub getEscapedQuoted 
+;
+sub getEscapedPath 
+;
+sub getAnchor 
+;
+sub setAnchor 
+;
+sub getRelative 
+;
+sub getQuotedRelative 
+;
+sub isRelative 
+;
+sub isAbsolute 
+;
+sub getAbsolute 
+;
+sub getQuotedAbsolute 
+;
+sub mkdir 
+;
+sub CleanPath 
+;
+1;

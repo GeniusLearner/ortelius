@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OMTarget>
+    <Version>6.3</Version>
+    <Name>metalworks.jar</Name>
+    <Project>JAVA METALWORKS</Project>
+    <TargetDefinitionFile>metalworks.jar.tgt</TargetDefinitionFile>
+    <OSPlatform>Java</OSPlatform>
+    <BuildType>Java Jar</BuildType>
+    <IntDirectory></IntDirectory>
+    <PhoneyTarget>false</PhoneyTarget>
+    <BuildTask>
+        <Name>Set Classpath</Name>
+        <OptionGroup>
+            <GroupName>Build Task Options</GroupName>
+            <Type>0</Type>
+        </OptionGroup>
+    </BuildTask>
+    <BuildTask>
+        <Name>Ant Javac</Name>
+        <OptionGroup>
+            <GroupName>Build Task Options</GroupName>
+            <Type>0</Type>
+            <Option>
+                <Flag>compiler=</Flag>
+                <Parameter>modern</Parameter>
+                <Description>Valid parameters are: modern, classic,
+                    jikes, gcj, sj, javac1.2, javac1.3 and javac1.4</Description>
+                <Type>91</Type>
+            </Option>
+            <Option>
+                <Flag>debug=</Flag>
+                <Parameter>true</Parameter>
+                <Description>If true, compile source with debug information.</Description>
+                <Type>82</Type>
+            </Option>
+            <Option>
+                <Flag>destdir=</Flag>
+                <Parameter></Parameter>
+                <Description>Indicates the directory, relative to the
+                    build directory, where the class files should be
+                    stored. If it is not used, the class files will be
+                    stored in the build directory.</Description>
+                <Type>90</Type>
+            </Option>
+        </OptionGroup>
+    </BuildTask>
+    <BuildTask>
+        <Name>Ant Jar</Name>
+        <OptionGroup>
+            <GroupName>Build Task Options</GroupName>
+            <Type>0</Type>
+            <Option>
+                <Flag>basedir=</Flag>
+                <Description>Indicates the directory from which to jar
+                    the files. If it is not used, the files will be
+                    jarred directly from the build directory.</Description>
+                <Type>90</Type>
+            </Option>
+            <Option>
+                <Flag>compress=</Flag>
+                <Parameter>true</Parameter>
+                <Description>If true, compress the JAR file. Defaults to true.</Description>
+                <Type>90</Type>
+            </Option>
+            <Option>
+                <Flag>manifest=</Flag>
+                <Description>The name of an existing manifest file to
+                    place in the JAR file. If not specified, Ant creates
+                    a manifest file indicating the version of Ant used.</Description>
+                <Type>90</Type>
+            </Option>
+        </OptionGroup>
+        <OptionGroup>
+            <GroupName>Compiled Classes</GroupName>
+            <Type>1</Type>
+            <Option>
+                <Flag>dir=</Flag>
+                <Description>Indicates the directory where the class
+                    files need to be pulled from. If it is not used, the
+                    classes will be pulled directly from the build directory.</Description>
+                <Type>90</Type>
+            </Option>
+            <Option>
+                <Flag>prefix=</Flag>
+                <Parameter></Parameter>
+                <Description>Ant attribute used to target a specified
+                    directory in the jar file.</Description>
+                <Type>90</Type>
+            </Option>
+        </OptionGroup>
+        <OptionGroup>
+            <GroupName>Meta-Inf</GroupName>
+            <Type>1</Type>
+            <Option>
+                <Flag>dir=</Flag>
+                <Description>Indicates the directory where the
+                    dependencies need to be pulled from. If it is not
+                    used, the dependencies will be pulled directly from
+                    the build directory.</Description>
+                <Type>90</Type>
+            </Option>
+            <Option>
+                <Flag>prefix=</Flag>
+                <Parameter>META-INF</Parameter>
+                <Description>Ant attribute used to push target the
+                    WEB-INF directory in the .war file.</Description>
+                <Type>95</Type>
+            </Option>
+        </OptionGroup>
+    </BuildTask>
+    <Dependency>
+        <Name>rt.jar</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Set Classpath</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>Set Classpath results</Name>
+        <Type>2</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>AquaMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>BigContrastMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>ContrastMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>DemoMetalTheme.java</Name>
+        <Type>9</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>GreenMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>KhakiMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalThemeMenu.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>Metalworks.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalworksDocumentFrame.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalworksFrame.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalworksHelp.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalworksInBox.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MetalworksPrefs.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>PropertiesMetalTheme.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>UISwitchListener.java</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Javac</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>Ant Javac results</Name>
+        <Type>2</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/back.gif</Name>
+        <Type>9</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/credits.html</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/duke.gif</Name>
+        <Type>9</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/javalogo.gif</Name>
+        <Type>9</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/metal.html</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/metalworks.html</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/swing.html</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>HelpFiles/toc.html</Name>
+        <Type>9</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_crop.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_draw.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_hand.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_select.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_text.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>IMAGES/palette_zoom.gif</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+    <Dependency>
+        <Name>MyTheme.theme</Name>
+        <Type>1</Type>
+        <ParentBuildTask>Ant Jar</ParentBuildTask>
+        <ParentOptionGroup>Build Task Options</ParentOptionGroup>
+    </Dependency>
+</OMTarget>

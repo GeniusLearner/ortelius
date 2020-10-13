@@ -1,0 +1,18 @@
+# Index created by AutoSplit for C:/Work/Catalyst/SourceCode/Openmake640_Trunk/perl/lib/Openmake/Snapshot.pm
+#    (file acts as timestamp)
+package Openmake::Snapshot;
+sub LeftSnapshotOnly 
+;
+sub new 
+;
+sub get 
+;
+sub getFileTStamp 
+;
+sub getFileSize 
+;
+sub fileExists 
+;
+sub exportSnapShot 
+;
+1;

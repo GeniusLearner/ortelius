@@ -1,0 +1,21 @@
+<project name="Japex Project">
+     
+    <property name="config" value="${wd}/japex-config.xml"/>
+
+    <!-- javac class output directory: -->
+    
+    <property name="dist.dir" value="${wd}/dist" />
+     
+    <property name="japex.lib.dir" value="${toolDir}/lib/" />
+    
+    <path id="class.path">
+        <fileset dir="${japex.lib.dir}" includes="*.jar"/>
+    </path>
+    
+    <target name="cleanbuild">
+        <java dir="${wd}" fork="true" classname="com.sun.japex.Japex">
+            <classpath refid="class.path"/>
+            <arg line="${config}"/>
+        </java>
+    </target>
+</project>

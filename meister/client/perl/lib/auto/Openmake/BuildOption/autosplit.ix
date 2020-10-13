@@ -1,0 +1,20 @@
+# Index created by AutoSplit for C:/Work/Catalyst/CVS/openmake-640_TRUNK/perl/lib/Openmake/BuildOption.pm
+#    (file acts as timestamp)
+package Openmake::BuildOption;
+sub new 
+;
+sub update 
+;
+sub getBuildTasks 
+;
+sub getOptionGroups 
+;
+sub getBuildTaskFiles 
+;
+sub getOption4File 
+;
+sub getBuildTaskOption 
+;
+sub getBuildTaskOptions 
+;
+1;

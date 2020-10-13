@@ -1,0 +1,40 @@
+# Index created by AutoSplit for C:/Work/Catalyst/SourceCode/Openmake640_Trunk/perl/lib/Openmake/File.pm
+#    (file acts as timestamp)
+package Openmake::File;
+sub fullfile  ;
+sub fullpath  ;
+sub getE  ;
+sub file  ;
+sub getFE  ;
+sub getDPFE  ;
+sub getExt 
+;
+sub getQuoted 
+;
+sub getEscaped 
+;
+sub getEscapedQuoted 
+;
+sub getJEscaped 
+;
+sub getJEscapedQuoted 
+;
+sub setFile 
+;
+sub getFile 
+;
+sub getF 
+;
+sub getPFE 
+;
+sub getDPF 
+;
+sub getDP 
+;
+sub getAbsolute 
+;
+sub getRelative 
+;
+sub dump 
+;
+1;

@@ -1,0 +1,28 @@
+<project name="FindBugs Project">
+
+    <!-- javac class output directory: -->
+    
+    <property name="reports.dir" value="${wd}/reports/html" />
+    
+    <property name="findbugs.lib.dir" value="${toolDir}/lib" />
+
+    <path id="findbugs.lib" >
+    	<pathelement location="${findbugs.lib.dir}/findbugs.jar" />
+    	<pathelement location="${findbugs.lib.dir}/findbugs-ant.jar" />
+    </path>
+  
+    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
+	        
+    <target name="cleanbuild">
+   	<findbugs home="${toolDir}" output="html" outputFile="${reports.dir}/report.html" >
+       		<auxClasspath path="${findbugs.lib.dir}/junit.jar" />
+       		_TOOL_CP_
+       		<classpath>
+       			<pathelement location="${findbugs.lib.dir}/*.jar" />	
+        	</classpath>
+        	
+     	</findbugs>
+    </target>
+
+
+</project>

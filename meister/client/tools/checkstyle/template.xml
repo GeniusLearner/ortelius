@@ -1,0 +1,44 @@
+<project name="CheckStyle Project" default="cleanbuild">
+
+    <!-- javac class output directory: -->
+     
+    <property name="classes.dir" value="${wd}/bin" />
+    
+    <property name="reports.xml.dir" value="${wd}/reports/xml" />
+    <property name="reports.html.dir" value="${wd}/reports/html" />
+    
+    <property name="checkstyle.lib.dir" value="${toolDir}/lib" />
+  
+    <path id="checkstyle.classpath">
+    	<fileset dir="${checkstyle.lib.dir}">
+        	<include name="*.jar"/>
+    	</fileset>
+    </path>
+
+    <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/> 
+    
+    <target name="clean">
+	<delete dir="${reports.xml.dir}"/>
+	<delete dir="${reports.html.dir}"/>
+    </target>
+
+    <target name="prepare">
+	<mkdir dir="${reports.xml.dir}"/>
+	<mkdir dir="${reports.html.dir}"/>
+    </target>
+     	    
+    <target name="cleanbuild" depends="clean, prepare">
+ 	<checkstyle config="${toolDir}/sun_checks.xml" failOnViolation="false">
+ 		 <fileset dir="${src}">
+		   
+		   _INCLUDE_
+		   
+		   _EXCLUDE_
+		   
+  		</fileset>
+   		<formatter type="xml" toFile="${reports.xml.dir}/report.xml"/>
+	</checkstyle>
+	
+	<style in="${reports.xml.dir}/report.xml" out="${reports.html.dir}/report.html" style="${toolDir}/checkstyle.xsl"/>
+     </target>
+</project>

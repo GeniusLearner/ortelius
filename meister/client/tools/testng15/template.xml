@@ -1,0 +1,75 @@
+<project name="testng" default="cleanbuild" basedir="..">
+
+   <property name="project_name" value="testngReport"/>
+   <property name="debug" value="true"/>
+   <property name="optimize" value="false"/>
+   <property name="build.compiler" value="javac1.5" />
+   
+   <property name="testng.lib.dir" value="${toolDir}/lib" />
+     
+    <path id="testng.classpath">
+    	<fileset dir="${testng.lib.dir}">
+        	<include name="*.jar"/>
+    	</fileset>
+    </path> 
+    
+    <taskdef resource="testngtasks" classpathref="testng.classpath"/>
+    
+   <!-- dirs for test output -->
+   <property name="reports.dir" value="${wd}/reports" />
+   <property name="reports.html.dir" value="${reports.dir}/html" />
+   <property name="junit.report" value="${reports.html.dir}/junit"/>
+
+   <target  name="clean"
+            description="clean up example results">
+      <delete dir="${reports.dir}"/>
+      <antcall target="prepare"/>
+   </target>   
+   
+   <target name="prepare">
+      <mkdir dir="${reports.dir}"/>
+      <mkdir dir="${reports.html.dir}"/>
+      <mkdir dir="${junit.report}"/>
+   </target>
+
+   <!-- ==================================================================== -->
+   <!-- Run                                                             -->
+   <!-- ==================================================================== -->
+
+   <path id="run.cp">
+      <path refid="testng.classpath"/>
+      _PATHELEMENT_
+      
+   </path>
+
+   <target  name="run"
+            description="run examples with java"
+            depends="clean,prepare">
+
+      <echo message="                                  testng-run "/>
+      
+      <testng classpathref="run.cp" 
+        outputDir="${reports.html.dir}" 
+        haltOnFailure="false" verbose="2"
+        suitename="Ant suite">  
+        
+        _CLASSFILESET_
+    	
+	</testng> 
+      
+   </target>
+
+   <target name="report"
+      description="generate reports using junireport"
+      depends="run">
+      <junitreport todir="${junit.report}">
+         <fileset dir="${reports.html.dir}/Ant suite">
+            <include name="*.xml"/>
+         </fileset>
+         <report format="noframes" todir="${junit.report}"/>
+      </junitreport>
+   </target>
+   
+   <target name="cleanbuild" depends="clean, prepare, run" />   
+
+</project>
