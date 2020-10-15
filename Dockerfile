@@ -1,4 +1,4 @@
-FROM quay.io/deployhub/meister:latest
+FROM quay.io/openmake/meister:latest
 
 WORKDIR /build/
 
