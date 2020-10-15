@@ -2,6 +2,7 @@ FROM quay.io/deployhub/meister:latest
 
 WORKDIR /build/
 
+COPY . /workspace
 RUN /workspace/tgt/build.sh
 
 FROM quay.io/ortelius/ortelius-base:latest
