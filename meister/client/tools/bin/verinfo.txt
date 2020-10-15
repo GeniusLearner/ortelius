@@ -1,8 +1,0 @@
-"CompanyName", "OpenMake Software"
-"FileDescription", "Meister"
-"FileVersion", "7, 4, 0, 0"
-"InternalName", "Meister"
-"LegalCopyright", "Copyright (C) 2011"
-"OriginalFilename", "Meister"
-"ProductName", "Meister"
-"ProductVersion", "7, 4, 0, 0"
