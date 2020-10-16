@@ -41,7 +41,7 @@ steps:
 
   # Build and push deployhub-webadmin.war - quay.io/ortelius/ortelius
   - name: 'gcr.io/cloud-builders/docker'
-    waitfor: login
+    waitFor: login
     entrypoint: 'bash'
     args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/Dockerfile .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
     env:
@@ -49,7 +49,7 @@ steps:
 
   # Build and push dh-ms-general.war - quay.io/ortelius/ms-general
   - name: 'gcr.io/cloud-builders/docker'
-    waitfor: login
+    waitFor: login
     entrypoint: 'bash'
     args: ["-c", '. /workspace/cloudbuild-general.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileGeneral .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
     env:
@@ -57,7 +57,7 @@ steps:
 
   # Build and push dh-ms-ui.war - quay.io/ortelius/ms-ui
   - name: 'gcr.io/cloud-builders/docker'
-    waitfor: login  
+    waitFor: login  
     entrypoint: 'bash'
     args: ["-c", '. /workspace/cloudbuild-ui.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileUI .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
     env:
@@ -65,7 +65,7 @@ steps:
 
   # Build and push dh-ms-general.war - quay.io/ortelius/ms-nginx
   - name: 'gcr.io/cloud-builders/docker'
-    waitfor: login
+    waitFor: login
     entrypoint: 'bash'
     args: ["-c", '. /workspace/cloudbuild-nginx.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileNginx .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
     env:
