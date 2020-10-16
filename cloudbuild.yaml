@@ -9,9 +9,28 @@ steps:
       - 'BLDDATE=`date`'
       - 'IMAGE_TAG="$BRANCH_NAME-v$$COMPONENT_VERSION.$$(git rev-list --count $BRANCH_NAME)-g$SHORT_SHA"'
 
+  # Set component name and tag for ms-nginx 
+  - name: gcr.io/cloud-builders/docker
+  entrypoint: 'bash'
+  args: ['-c', 'cp /workspace/cloudbuild.sh /workspace/cloudbuild-nginx.sh;env | sed "s/^/export /" >> /workspace/cloudbuild-nginx.sh']
+  env: 
+    - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-nginx'
+
+  # Set component name and tag for ms-general 
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: 'bash'
+    args: ['-c', 'cp /workspace/cloudbuild.sh /workspace/cloudbuild-general.sh;env | sed "s/^/export /" >> /workspace/cloudbuild-general.sh']
+    env: 
+      - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-general'
+  
+  # Set component name and tag for ms-ui 
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: 'bash'
+    args: ['-c', 'cp /workspace/cloudbuild.sh /workspace/cloudbuild-ui.sh;env | sed "s/^/export /" >> /workspace/cloudbuild-ui.sh']
+    env: 
+      - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-ui'
+
   # Login to Quay for push.
-  # PASSWORD is decrypted before this step runs.
-  # Note: You need a shell to resolve environment variables with $$
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     env:
@@ -19,74 +38,33 @@ steps:
     args: ['-c', '. /workspace/cloudbuild.sh;docker login quay.io --username "$$QUAY_USERID" --password $$QUAY_PASSWORD']
     secretEnv: ['QUAY_USERID', 'QUAY_PASSWORD']     
 
-  # Build deployhub-webadmin.war - quay.io/ortelius/ortelius
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" -f /workspace/docker/Dockerfile .']
-     
-  # Push the image to Quay.
+  # Build and push deployhub-webadmin.war - quay.io/ortelius/ortelius
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     env:
       - 'DOCKER_CONFIG=/workspace/docker-config'
-    args: ['-c', ". /workspace/cloudbuild.sh;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG"]
+    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/Dockerfile .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
 
-  # Set component name and tag 
-  - name: gcr.io/cloud-builders/docker
-    entrypoint: 'bash'
-    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh']
-    env: 
-      - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-general'
-
-  # Build dh-ms-general.war - quay.io/ortelius/ms-general
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" -f /workspace/docker/DockerfileGeneral .']
-     
-  # Push the image to Quay.
+  # Build and push dh-ms-general.war - quay.io/ortelius/ms-general
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     env:
       - 'DOCKER_CONFIG=/workspace/docker-config'
-    args: ['-c', ". /workspace/cloudbuild.sh;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG"]
+    args: ["-c", '. /workspace/cloudbuild-general.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileGeneral .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
 
-  # Set component name and tag 
-  - name: gcr.io/cloud-builders/docker
-    entrypoint: 'bash'
-    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh']
-    env: 
-      - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-ui'
-
-  # Build dh-ms-general.war - quay.io/ortelius/ms-ui
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" -f /workspace/docker/DockerfileUI .']
-     
-  # Push the image to Quay.
+  # Build and push dh-ms-ui.war - quay.io/ortelius/ms-ui
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     env:
       - 'DOCKER_CONFIG=/workspace/docker-config'
-    args: ['-c', ". /workspace/cloudbuild.sh;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG"]
+    args: ["-c", '. /workspace/cloudbuild-ui.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileUI .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
 
-  # Set component name and tag 
-  - name: gcr.io/cloud-builders/docker
-    entrypoint: 'bash'
-    args: ['-c', 'env | sed "s/^/export /" >> /workspace/cloudbuild.sh']
-    env: 
-      - 'COMPONENT_DOCKERREPO=quay.io/ortelius/ms-nginx'
-
-  # Build dh-ms-general.war - quay.io/ortelius/ms-nginx
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ["-c", '. /workspace/cloudbuild.sh;docker build --tag "$$COMPONENT_DOCKERREPO:$$IMAGE_TAG" -f /workspace/docker/DockerfileNginx .']
-     
-  # Push the image to Quay.
+  # Build and push dh-ms-general.war - quay.io/ortelius/ms-nginx
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     env:
       - 'DOCKER_CONFIG=/workspace/docker-config'
-    args: ['-c', ". /workspace/cloudbuild.sh;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG"]
+    args: ["-c", '. /workspace/cloudbuild-nginx.sh;docker build --tag $$COMPONENT_DOCKERREPO:$$IMAGE_TAG -f /workspace/docker/DockerfileNginx .;docker push $$COMPONENT_DOCKERREPO:$$IMAGE_TAG']
 
 secrets:
 - kmsKeyName: projects/eighth-physics-169321/locations/global/keyRings/cli/cryptoKeys/quay
